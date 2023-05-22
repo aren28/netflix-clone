@@ -1,0 +1,15 @@
+@import 'reset.css';
+
+html {
+  box-sizing: border-box;
+}
+ 
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+}

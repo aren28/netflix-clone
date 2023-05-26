@@ -1,15 +1,20 @@
-@import 'reset.css';
+@import "reset.css";
 
 html {
   box-sizing: border-box;
 }
- 
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
 body {
-    font-family: 'Bebas Neue', sans-serif;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 16px;
+  background: rgba(20, 20, 20);
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 10%,
+    transparent
+  );
 }

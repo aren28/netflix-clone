@@ -1,11 +1,35 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-function App() {
+// コンポネント
+import Header from "./Components/Header/Header";
+import Index from "./Components/TopMovieList/Index";
+import { TopMovieData } from "./Components/TopMovieList/Parts/TopMovieData";
+
+import { createTheme, ThemeProvider } from "@mui/material/";
+
+const theme = createTheme({
+  typography: {
+    // Tell Material UI what the font-size on the html element is.
+    htmlFontSize: 10,
+    fontFamily: ['"Bebas Neue"', '"Noto Sans JP"', "sans-serif"].join(","),
+  },
+});
+
+function Root() {
   return (
     <>
-      <h1>This is init mode</h1>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Index>
+          {TopMovieData.map((movie) => (
+            <Index.Item movie={movie} key={movie.id}>
+              item1
+            </Index.Item>
+          ))}
+        </Index>
+      </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default Root;

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import cx from "classnames";
 import SliderContext from "./Context";
 import ShowDetailsButton from "./ShowDetailsButton";
@@ -6,8 +6,10 @@ import Mark from "./Mark";
 import "./Scss/Item.scss";
 
 const Item = ({ movie }) => (
+
   <SliderContext.Consumer>
-    {({ onSelectSlide, currentSlide, elementRef }) => {
+    {({ onSelectSlide, currentSlide, elementRef , onUrl, currentUrl}) => {
+      
       const isActive = currentSlide && currentSlide.id === movie.id;
 
       return (
@@ -17,7 +19,7 @@ const Item = ({ movie }) => (
             "item--open": isActive,
           })}
         >
-          <img src={movie.image} alt="" />
+          <img src={movie.image} alt=""/>
           <ShowDetailsButton onClick={() => onSelectSlide(movie)} />
           {isActive && <Mark />}
         </div>

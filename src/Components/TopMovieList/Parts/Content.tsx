@@ -1,9 +1,38 @@
-import React from "react";
+import React,{useState} from "react";
 import IconCross from "./Icons/IconCross";
 import "./Scss/Content.scss";
+import { Box,Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { ButtonProps } from "@mui/material/Button";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
-const Content = ({ movie, onClose }) => (
-  <div className="content">
+import Modal from "./Modal/Modal";
+
+const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  width: "15vw",
+  height: "85px",
+  backgroundColor: "white",
+  color: "black",
+  fontSize: 20,
+  marginLeft: "2.5vw",
+  "&:hover": {
+    backgroundColor: "transparent",
+    color: "white",
+    border: "1px solid white"
+  },
+}));
+
+const Content = ({ movie, onClose }) => {
+  
+  const [ modalOpen,setModalOpen ] = useState(false);
+
+  const handleModal = (e:any) => {
+    setModalOpen(!modalOpen);
+  } 
+
+  return (
+  <>
+    <div className="content">
     <div className="content__background">
       <div className="content__background__shadow" />
       <div
@@ -24,8 +53,16 @@ const Content = ({ movie, onClose }) => (
       <button className="content__close" onClick={onClose}>
         <IconCross />
       </button>
+
+      {/* modal */}
+      <Box component="div">
+        <ColorButton variant="contained" startIcon={<PlayArrowIcon />} onClick={handleModal}>プレイ</ColorButton>
+        {modalOpen && <Modal movie={movie} handleModal={handleModal}/>}
+      </Box>
     </div>
   </div>
-);
+  </>
+  )
+};
 
 export default Content;

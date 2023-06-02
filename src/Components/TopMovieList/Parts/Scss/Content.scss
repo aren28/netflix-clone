@@ -2,6 +2,8 @@
   position: relative;
   height: 37vw;
   margin-top: -40px;
+  animation-name: showSlow;
+  animation-duration: 1s;
 
   &__background,
   &__background__shadow,
@@ -80,4 +82,14 @@
     top: 30px;
     right: 30px;
   }
+}
+
+
+@keyframes showSlow {
+  0% {
+    height: 0vw;
+  }
+  100% {
+    height: 37vw;
+  }  
 }

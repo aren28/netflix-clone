@@ -6,6 +6,7 @@ export const TopMovieData = [
     image: num1,
     imageBg: "/images/slide1b.webp",
     title: "1983",
+    movieUrl: "https://firebasestorage.googleapis.com/v0/b/netflix-clone-647e5.appspot.com/o/beatItMp4.mp4?alt=media&token=5903d721-6217-4531-8875-794aa4323b4f",
   },
   {
     id: 2,

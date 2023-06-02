@@ -16,6 +16,7 @@ function TopMovieList({ children, activeSlide }) {
   const { width, elementRef } = useSizeElement();
   const { handlePrev, handleNext, slideProps, containerRef, hasNext, hasPrev } =
     useSliding(width, React.Children.count(children));
+  const [currentUrl,setCurrentUrl] = useState("");
 
   const handleSelect = (movie: any) => {
     setCurrentSlide(movie);
@@ -25,11 +26,17 @@ function TopMovieList({ children, activeSlide }) {
     setCurrentSlide(null);
   };
 
+  const handleUrl = (movie: any) => {
+    setCurrentUrl(movie);
+  };
+
   const contextValue = {
     onSelectSlide: handleSelect,
     onCloseSlide: handleClose,
+    onUrl: handleUrl,
     elementRef,
     currentSlide,
+    currentUrl
   };
 
   return (

@@ -3,10 +3,12 @@
   transition: transform 300ms ease 100ms;
   margin: 0 2px;
   position: relative;
+  z-index: 4;
 
   img {
     height: 100%;
     width: 100%;
     vertical-align: top;
+    position: relative;
   }
 }

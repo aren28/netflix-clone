@@ -1,9 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoIcon from "@mui/icons-material/Info";
 import { ButtonProps } from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Container, Button, SvgIcon } from "@mui/material";
+
+// モーダルコンポネント
+import MovieInformation from "../../MovieInformation/MovieInformation";
 
 // style
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -19,6 +22,16 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 }));
 
 function FirstView() {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handeOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handeCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <>
       <Container
@@ -89,10 +102,18 @@ function FirstView() {
             <ColorButton variant="contained" startIcon={<PlayArrowIcon />}>
               再生してみる
             </ColorButton>
-            <ColorButton variant="contained" startIcon={<InfoIcon />}>
+            <ColorButton
+              variant="contained"
+              startIcon={<InfoIcon />}
+              onClick={handeOpenModal}
+            >
               詳細情報
             </ColorButton>
           </Box>
+          <MovieInformation
+            closeModal={handeCloseModal}
+            openModal={openModal}
+          />
         </Box>
       </Container>
     </>

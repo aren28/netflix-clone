@@ -7,6 +7,7 @@ import { Box, Typography, Container, Button, SvgIcon } from "@mui/material";
 
 // モーダルコンポネント
 import MovieInformation from "../../MovieInformation/MovieInformation";
+import MoviePlayer from "../../MoviePlayer/MoviePlayer";
 
 // style
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -23,9 +24,16 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 
 function FirstView() {
   const [openModal, setOpenModal] = useState(false);
+  const [openVideo, setOpenVideo] = useState(false);
+
+  const handleCloseVideo = () => ( setOpenVideo(false) );
 
   const handeOpenModal = () => {
     setOpenModal(true);
+  };
+
+  const handleOpenVideo = (e:any) => {
+    setOpenVideo(true);
   };
 
   const handeCloseModal = () => {
@@ -39,14 +47,14 @@ function FirstView() {
       >
         <Box
           component="img"
-          src="./src/Assets/img/Header/movie-one.webp"
+          src="./src/Assets/img/Header/movie-two.jpg"
           sx={banner}
         ></Box>
         <Box component="div" sx={details}>
           <Box
             component="img"
-            src="./src/Assets/img/Header/movie-one-logo.webp"
-            sx={{ mb: 5 }}
+            src="./src/Assets/img/Header/movie-two-logo.png"
+            sx={{ mb: 5 , position: "absolute",top:"-17rem",left:"-3rem",width:"670px",}}
           ></Box>
           <Box
             component="div"
@@ -83,7 +91,7 @@ function FirstView() {
                 points="8.4639503 12.8342327 6.65837455 13.2666206 6.65837455 7.77862061 4.65323515 7.77862061 4.65323515 6.22012364 10.4690897 6.22012364 10.4690897 7.77862061 8.4639503 7.77862061"
               ></polygon>
             </SvgIcon>
-            <Typography sx={{ fontSize: 65 }}> #6 in TV Shows Today</Typography>
+            <Typography sx={{ fontSize: 65 , color:"#FFFFFF"}}> #6 in TV Shows Today</Typography>
           </Box>
           <Typography
             sx={{
@@ -99,7 +107,7 @@ function FirstView() {
             — or leave alone?
           </Typography>
           <Box component="div" sx={detailsButton}>
-            <ColorButton variant="contained" startIcon={<PlayArrowIcon />}>
+            <ColorButton variant="contained" startIcon={<PlayArrowIcon />} onClick={handleOpenVideo}>
               再生してみる
             </ColorButton>
             <ColorButton
@@ -110,6 +118,7 @@ function FirstView() {
               詳細情報
             </ColorButton>
           </Box>
+          <MoviePlayer onOpen={openVideo} onClose={handleCloseVideo} video={"https://firebasestorage.googleapis.com/v0/b/netflix-clone-647e5.appspot.com/o/TransFormer-rise.mp4?alt=media&token=8a73dd8a-a8ca-4b26-af6d-297e626d16dc&_gl=1*12rq3jh*_ga*MTIwNTMzMDUxOS4xNjg0MzI1MzA3*_ga_CW55HF8NVT*MTY4NjY2NTAzOS4xMi4xLjE2ODY2NjUwODEuMC4wLjA."}/>
           <MovieInformation
             closeModal={handeCloseModal}
             openModal={openModal}

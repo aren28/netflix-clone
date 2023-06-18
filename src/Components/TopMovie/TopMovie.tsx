@@ -1,92 +1,77 @@
-import React,{ useState, useEffect,useCallback } from "react";
+import React,{ useState, useEffect} from "react";
 import { motion } from "framer-motion";
-import { List, ListItem , ListItemIcon , Box , Paper, CardContent, CardActions, Button , IconButton } from "@mui/material";
-import { PlayCircle, Add, ThumbUpOffAlt, NavigateNext, ArrowBackIos } from '@mui/icons-material/';
+import { List, ListItem , Box} from "@mui/material";
 import { TopMovieDetails, TopMovieVideo } from "../../Database/TopMovieDetails/TopMovieDetails";  
 
 import MoviePlayer from "../MoviePlayer/MoviePlayer";
 import "./css/topmovie.css";
 
+// モジュール
+import { TopMovieContextValueProvider } from "./TopMovieContext";
+import LeftArrow from "./Parts/PrevArrow";
+import NextArrow from "./Parts/NextArrow";
+import HoverVideo from "./Parts/HoverVideo";
+import PlainVideo from "./Parts/PlainVideo";
+
 interface HoverState {
-  [key: string]:boolean,
+  [key: number]:boolean,
 }
 
 interface newHoverState {
-  [key: string]: boolean,
+  [key: number]: boolean,
+}
+
+const Card = (  MovieHoverStatusImg:any, id:any  ) => {
+  return(
+    <HoverVideo MovieHoverStatusImg={MovieHoverStatusImg} id={id} />
+  );
+}
+
+const Initial = (rankingNumber:any, rankingBackground:any ) => {
+  return (
+    <PlainVideo rankingNumber={rankingNumber} rankingBackground={rankingBackground} />
+  );
 }
 
 function TopMovie() {
 
   const [ newElement, setNewElement ] = useState(false);
   const [ openVideo, setOpenVideo ] = useState(false);
-  const [ video, setVideo ] = useState();
+  const [ video, setVideo ] = useState<string | undefined>("");
   const [ hoverId, setHoverId ] = useState(0);
-  const [ hoverIdArray, setHoverIdArray ] = useState<HoverState>( {1:false,2:false} );
+  const [ hoverIdArray, setHoverIdArray ] = useState<HoverState>(Array(TopMovieDetails.length).fill(false));
 
-  // const handleOpenVideo = (e:any) => {
-  //   console.log(e.target.id);
-  //   console.log(TopMovieVideo[e.target.id].videoUrl);
-  // };
-
-  const handleOpenVideo = (e:any) => {
-    setOpenVideo(true);
-    setVideo(TopMovieVideo[e.target.id].videoUrl);
-    console.log(e.target.id);
-  };
-  const handleCloseVideo = () => ( setOpenVideo(false) );
-
-  const Card = (MovieHoverStatusImg:any, id:any) => (
-    <React.Fragment>
-      <Paper id={id} component={motion.div} initial={{ scale: 0 , opacity: 0, translateX: 0 }}  animate={{ scale: 1.25 , opacity:1}} transition={{ duration: .3}} style={{ width: "400px" , height: "400px", borderRadius:"30px" , position: "absolute", zIndex: 4,background: "black", color:"white", cursor:"pointer"}}
-      onClick={ e => {handleOpenVideo(e)} }
-      >
-        <CardContent sx={{ padding: 0}}>
-          <Box component="img" id={id} src={MovieHoverStatusImg} sx={{ width: "100%" , borderTopLeftRadius: "35px",borderTopRightRadius: "35px"}}></Box>
-          <ListItemIcon sx={{ mt: 2, ml: 1}}>
-            <PlayCircle color="primary"/>
-            <Add color="primary"/>
-            <ThumbUpOffAlt color="primary"/>
-          </ListItemIcon>
-        </CardContent>
-        <CardActions>
-          <Button size="small">種類：ドラマー、恋愛、Slice of Life</Button>
-        </CardActions>
-      </Paper>
-    </React.Fragment>
-  );
-  const Initial = (rankingNumber:any, rankingBackground:any) => (
-    <React.Fragment>
-      {rankingNumber}
-      <Box
-        component="img"
-        src={rankingBackground}
-        sx={{ borderRadius: "30px" , width:"210px"}}
-      />
-    </React.Fragment>
+  const handleCloseVideo = () => ( 
+    setOpenVideo(false) 
   );
 
-  const setId = (e:any) => {
-    e.preventDefault;
-    const newList: newHoverState = hoverIdArray;
-    newList[`${e.target.id}`] = true;
-    setHoverId(e.target.id);
-    setHoverIdArray(newList);
+  const setId = (id:number ,e:any) => {
+    e.preventDefault();
+    setHoverId(id);
+    setHoverIdArray((prevState) => {
+      const newList : newHoverState = [...prevState];
+      newList[`${id}`] = true;
+      return newList;
+    }
+    );
   }
 
   const removeId = (e:any) => {
-    e.preventDefault;
-    const newList: newHoverState = hoverIdArray;
-    newList[`${hoverId}`] = false;
-    setHoverId(0);
-    setHoverIdArray(newList);
+    e.preventDefault();
+    setHoverIdArray((prevState) => {
+        const newList : newHoverState = [...prevState];
+        newList[`${hoverId}`] = false;
+        return newList;
+      }
+    );
   }
 
   const handleHover = () => {
     return (
       TopMovieDetails.map((data, index) => (
-        <ListItem id={index + 1} sx={ newElement ? containerMovieItemHover : containerMovieItem } component={motion.div} onMouseEnter={setId} onMouseLeave={removeId} className="movieHover">
-          {hoverIdArray[index + 1] == true ? Card(TopMovieDetails[index].MovieHoverStatusImg,index) : Initial(TopMovieDetails[index].rankingImg, TopMovieDetails[index].rankingBackground)}
-        </ListItem>
+          <ListItem id={index} sx={ newElement ? containerMovieItemHover : containerMovieItem } component={motion.div} onMouseEnter={(e) => {setId(e.target.id ,e)}} onMouseLeave={(e) => {removeId(e)}} className="movieHover">
+            {hoverIdArray[index] ? Card(TopMovieDetails[index].MovieHoverStatusImg,index) : Initial(TopMovieDetails[index].rankingImg, TopMovieDetails[index].rankingBackground)}
+          </ListItem>
       ))
     )
   }
@@ -112,58 +97,43 @@ function TopMovie() {
     }
   }, [currentViewX]) 
 
-  const handlePrevView = () => {
-    if (currentViewX != 0) {
-      setCurrentViewX(0);
-    }
-  }
-
-  const handleNextView = () => {
-
-    if (currentViewX == 0) {
-      setCurrentViewX( -((currentViewMovieCount * 500) - 100) );
-    } else {
-      setCurrentViewX( -(currentViewX + (currentWidth - currentViewX)) );
-    }
-
-  }
-
   return (
     <div>
-      <Box component={motion.div} className="container" sx={containerMovie}>
-        {
-          prevView && 
-          <IconButton sx={{ position:"absolute" , zIndex: 4, top:"85px", left:"0px", width:"5rem", height:"20rem" , borderRadius: "0px" , background:"black" }} color="primary" onClick={handlePrevView}>
-            <ArrowBackIos fontSize="large"/>
-          </IconButton>
+      <TopMovieContextValueProvider value = {
+        { 
+          setVideo,
+          setOpenVideo,
+          currentViewX , 
+          setCurrentViewX, 
+          nextView, 
+          prevView,
+          currentViewMovieCount,
+          currentWidth
         }
-        <List
-          component={motion.div}
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            width: "5000px",
-            height: "500px",
-            marginLeft: 5,
-            overflowX: "visible",
-            position: "relative",
-            zIndex: 3
-          }}
-          animate={{ x: currentViewX }}
-          transition={{ duration: 0.8 }}
-        >
-
-          {handleHover()}
-
-        </List>
-        {
-          nextView && 
-          <IconButton sx={{ position:"absolute" , zIndex: 4, top:"85px", right:"0px",  width:"5rem", height:"20rem" , borderRadius: "0px" , background:"black"}} color="primary" onClick={handleNextView}>
-            <NavigateNext fontSize="large"/>
-          </IconButton>
-        }
-        <MoviePlayer onOpen={openVideo} onClose={handleCloseVideo} video={video}/>
-      </Box>
+      }>
+        <Box component={motion.div} className="container" sx={containerMovie}>
+          <LeftArrow/>
+          <List
+            component={motion.div}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              width: "5000px",
+              height: "500px",
+              marginLeft: 5,
+              overflowX: "visible",
+              position: "relative",
+              zIndex: 3
+            }}
+            animate={{ x: currentViewX }}
+            transition={{ duration: 0.8 }}
+          >
+            {handleHover()}
+          </List>
+          <NextArrow />
+          <MoviePlayer onOpen={openVideo} onClose={handleCloseVideo} video={video}/>
+        </Box>
+      </TopMovieContextValueProvider>
     </div>
   );
 }

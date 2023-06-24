@@ -6,25 +6,38 @@ import { ArrowBackIos } from "@mui/icons-material";
 import TopMovieContext from "../TopMovieContext";
 
 function PrevArrow() {
-  const { currentViewX, setCurrentViewX, prevView } = useContext(TopMovieContext);
+  const { currentViewX, setCurrentViewX, prevView } =
+    useContext(TopMovieContext);
 
-  const handlePrevView = (e:any) => {
+  const handlePrevView = (e: any) => {
     e.preventDefault();
     if (currentViewX != 0) {
       setCurrentViewX(0);
     }
-  }
+  };
 
   return (
     <div>
-        {
-          prevView && 
-          <IconButton sx={{ position:"absolute" , zIndex: 4, top:"85px", left:"0px", width:"5rem", height:"20rem" , borderRadius: "0px" , background:"black" }} color="primary" onClick={handlePrevView}>
-            <ArrowBackIos fontSize="large"/>
-          </IconButton>
-        }
+      {prevView && (
+        <IconButton
+          sx={{
+            position: "absolute",
+            zIndex: 4,
+            top: "85px",
+            left: "0px",
+            width: "5rem",
+            height: "20rem",
+            borderRadius: "0px",
+            background: "black",
+          }}
+          color="primary"
+          onClick={handlePrevView}
+        >
+          <ArrowBackIos fontSize="large" />
+        </IconButton>
+      )}
     </div>
-  )
+  );
 }
 
-export default PrevArrow
+export default PrevArrow;

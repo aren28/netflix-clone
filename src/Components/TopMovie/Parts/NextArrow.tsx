@@ -6,27 +6,45 @@ import { NavigateNext } from "@mui/icons-material";
 import TopMovieContext from "../TopMovieContext";
 
 function NextArrow() {
-  const { currentViewX, setCurrentViewX, nextView ,currentViewMovieCount,currentWidth} = useContext(TopMovieContext);
+  const {
+    currentViewX,
+    setCurrentViewX,
+    nextView,
+    currentViewMovieCount,
+    currentWidth,
+  } = useContext(TopMovieContext);
 
-  const handleNextView = (e:any) => {
+  const handleNextView = (e: any) => {
     e.preventDefault();
     if (currentViewX == 0) {
-      setCurrentViewX( -((currentViewMovieCount * 500) - 100) );
+      setCurrentViewX(-(currentViewMovieCount * 500 - 100));
     } else {
-      setCurrentViewX( -(currentViewX + (currentWidth - currentViewX)) );
+      setCurrentViewX(-(currentViewX + (currentWidth - currentViewX)));
     }
-  }
+  };
 
   return (
     <div>
-        {
-          nextView && 
-          <IconButton sx={{ position:"absolute" , zIndex: 4, top:"85px", right:"0px",  width:"5rem", height:"20rem" , borderRadius: "0px" , background:"black"}} color="primary" onClick={handleNextView}>
-            <NavigateNext fontSize="large"/>
-          </IconButton>
-        }
+      {nextView && (
+        <IconButton
+          sx={{
+            position: "absolute",
+            zIndex: 4,
+            top: "85px",
+            right: "0px",
+            width: "5rem",
+            height: "20rem",
+            borderRadius: "0px",
+            background: "black",
+          }}
+          color="primary"
+          onClick={handleNextView}
+        >
+          <NavigateNext fontSize="large" />
+        </IconButton>
+      )}
     </div>
-  )
+  );
 }
 
-export default NextArrow
+export default NextArrow;

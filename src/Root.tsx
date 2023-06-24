@@ -11,7 +11,7 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#FFFFFF',
+      main: "#FFFFFF",
     },
   },
 });

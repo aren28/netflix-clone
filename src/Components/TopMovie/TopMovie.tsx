@@ -70,7 +70,7 @@ function TopMovie() {
   const handleHover = () => {
     return TopMovieDetails.map((data, index) => (
       <ListItem
-        id={index}
+        id={`${index}`}
         sx={containerMovieItem}
         component={motion.div}
         onMouseEnter={(e) => {

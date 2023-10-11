@@ -23,11 +23,11 @@ interface newHoverState {
   [key: number]: boolean;
 }
 
-const Card = (MovieHoverStatusImg: string, id: number) => {
+const Card = (MovieHoverStatusImg:any, id: number) => {
   return <HoverVideo MovieHoverStatusImg={MovieHoverStatusImg} id={id} />;
 };
 
-const Initial = (rankingNumber: string, rankingBackground: string) => {
+const Initial = (rankingNumber:any, rankingBackground:string) => {
   return (
     <PlainVideo
       rankingNumber={rankingNumber}
@@ -37,9 +37,8 @@ const Initial = (rankingNumber: string, rankingBackground: string) => {
 };
 
 function TopMovie() {
-  const [newElement, setNewElement] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
-  const [video, setVideo] = useState<string | undefined>("");
+  const [video, setVideo] = useState<string>("");
   const [hoverId, setHoverId] = useState(0);
   const [hoverIdArray, setHoverIdArray] = useState<HoverState>(
     Array(TopMovieDetails.length).fill(false)
@@ -47,20 +46,19 @@ function TopMovie() {
 
   const handleCloseVideo = () => setOpenVideo(false);
 
-  const setId = (id: number, e: any) => {
+  const setId = (id: number,e: any) => {
     e.preventDefault();
     setHoverId(id);
-    setHoverIdArray((prevState) => {
+    setHoverIdArray((prevState : any) => {
       const newList: newHoverState = [...prevState];
       newList[`${id}`] = true;
       return newList;
     });
-    console.log(hoverIdArray);
   };
 
   const removeId = (e: any) => {
     e.preventDefault();
-    setHoverIdArray((prevState) => {
+    setHoverIdArray((prevState : any) => {
       const newList: newHoverState = [...prevState];
       newList[`${hoverId}`] = false;
       return newList;
@@ -68,18 +66,20 @@ function TopMovie() {
   };
 
   const handleHover = () => {
-    return TopMovieDetails.map((data, index) => (
+    return TopMovieDetails.map((_data, index) => (
       <ListItem
+        key={index}
         id={`${index}`}
         sx={containerMovieItem}
         component={motion.div}
         onMouseEnter={(e) => {
-          setId(e.target.id, e);
+          const target = e.target as any;
+          setId(target.id,e);
         }}
         onMouseLeave={(e) => {
           removeId(e);
         }}
-        className="movieHover"
+        className ="movieHover"
       >
         {hoverIdArray[index]
           ? Card(TopMovieDetails[index].MovieHoverStatusImg, index)
@@ -173,14 +173,5 @@ const containerMovieItem = {
   marginRight: "35px",
 };
 
-const containerMovieItemHover = {
-  position: "relative",
-  zIndex: "4",
-  width: "450px",
-  justifyContent: "flex-end",
-  paddingLeft: "70px",
-  left: "-20rem",
-  bottom: "13.5rem",
-};
-
 export default TopMovie;
+

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useRef } from "react";
 import {
   Button,
   Dialog,
@@ -9,7 +9,6 @@ import {
   Box,
 } from "@mui/material/";
 import CancelIcon from "@mui/icons-material/Cancel";
-// picture
 import pic1 from "../../Database/ModalDetails/MovieOne/pic1.webp";
 
 interface ModalProps {
@@ -18,7 +17,7 @@ interface ModalProps {
 }
 
 const MovieInformation: React.FC<ModalProps> = ({ closeModal, openModal }) => {
-  const descriptionElementRef = React.useRef<HTMLElement>(null);
+  const descriptionElementRef = useRef<HTMLElement>(null);
 
   return (
     <>

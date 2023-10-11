@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, IconButton, Typography, Modal } from "@mui/material";
+import { Box, IconButton, Modal } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { ReactNetflixPlayer } from "react-netflix-player";
 

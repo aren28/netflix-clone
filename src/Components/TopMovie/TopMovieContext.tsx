@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const TopMovieContext = createContext(undefined);
+const TopMovieContext = createContext<unknown>(undefined);
 
 export const TopMovieContextValueProvider = TopMovieContext.Provider;
 

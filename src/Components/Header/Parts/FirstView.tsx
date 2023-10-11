@@ -10,7 +10,7 @@ import MovieInformation from "../../MovieInformation/MovieInformation";
 import MoviePlayer from "../../MoviePlayer/MoviePlayer";
 
 // style
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+const ColorButton = styled(Button)<ButtonProps>(() => ({
   width: "15vw",
   height: "85px",
   backgroundColor: "black",
@@ -32,7 +32,7 @@ function FirstView() {
     setOpenModal(true);
   };
 
-  const handleOpenVideo = (e: any) => {
+  const handleOpenVideo = () => {
     setOpenVideo(true);
   };
 

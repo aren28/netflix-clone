@@ -15,9 +15,12 @@ import { TopMovieVideo } from "../../../Database/TopMovieDetails/TopMovieDetails
 // モジュール
 import TopMovieContext from "../TopMovieContext";
 
-function HoverVideo({ MovieHoverStatusImg, id }) {
+function HoverVideo(MovieHoverStatusImg:any, id: number) {
 
-  const { setOpenVideo, setVideo } = useContext(TopMovieContext);
+  const { setOpenVideo, setVideo } = useContext(TopMovieContext) as {
+    setOpenVideo:  (params: boolean) => void;
+    setVideo:  (params: string) => void;
+  };
 
   const handleOpenVideo = (e: any) => {
     setOpenVideo(true);
@@ -27,7 +30,7 @@ function HoverVideo({ MovieHoverStatusImg, id }) {
   return (
     <div>
       <Paper
-        id={id}
+        id={id.toString()}
         component={motion.div}
         initial={{ scale: 0, opacity: 0, translateX: 0 }}
         animate={{ scale: 1.25, opacity: 1 }}
@@ -51,8 +54,8 @@ function HoverVideo({ MovieHoverStatusImg, id }) {
         <CardContent sx={{ padding: 0 }}>
           <Box
             component="img"
-            id={id}
-            src={MovieHoverStatusImg}
+            id={id.toString()}
+            src={MovieHoverStatusImg.MovieHoverStatusImg}
             sx={{
               width: "100%",
               borderTopLeftRadius: "35px",

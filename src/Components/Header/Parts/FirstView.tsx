@@ -9,7 +9,10 @@ import { Box, Typography, Container, Button, SvgIcon } from "@mui/material";
 import MovieInformation from "../../MovieInformation/MovieInformation";
 import MoviePlayer from "../../MoviePlayer/MoviePlayer";
 
-// style
+// イメージ
+import IMAGES from "../../Header/Images/HeaderImages";
+
+// スタイル
 const ColorButton = styled(Button)<ButtonProps>(() => ({
   width: "15vw",
   height: "85px",
@@ -47,13 +50,13 @@ function FirstView() {
       >
         <Box
           component="img"
-          src="./src/Assets/img/Header/movie-two.jpg"
+          src={IMAGES.movie_two}
           sx={banner}
         ></Box>
         <Box component="div" sx={details}>
           <Box
             component="img"
-            src="./src/Assets/img/Header/movie-two-logo.png"
+            src={IMAGES.movie_two_logo}
             sx={{
               mb: 5,
               position: "absolute",

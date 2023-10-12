@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material/";
 import CancelIcon from "@mui/icons-material/Cancel";
-import pic1 from "../../Database/ModalDetails/MovieOne/pic1.webp";
+import pic1 from "@database/ModalDetails/MovieOne/pic1.webp";
 
 interface ModalProps {
   closeModal: (params: any) => void;

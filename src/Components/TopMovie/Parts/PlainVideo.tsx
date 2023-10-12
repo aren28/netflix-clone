@@ -1,6 +1,12 @@
 import { Box } from "@mui/material";
 
-function PlainVideo({rankingNumber, rankingBackground} : {rankingNumber: any,rankingBackground:string}) {
+function PlainVideo({
+  rankingNumber,
+  rankingBackground,
+}: {
+  rankingNumber: any;
+  rankingBackground: string;
+}) {
   const rankingNumberProps = rankingNumber.props;
   const rankingNumberPropsChildren = rankingNumber.props.children.props;
   return (

@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 // イメージ
-import IMAGES from "../../Header/Images/HeaderImages";
+import IMAGES from "@components/Header/Images/HeaderImages";
 
 const pages = ["ホーム", "番組", "映画", "新規", "マイリスト"];
 const settings = ["プロフィール", "アカウント", "ダッシュボード", "ログアウト"];

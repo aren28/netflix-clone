@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { List, ListItem, Box } from "@mui/material";
-import {
-  TopMovieDetails,
-} from "../../Database/TopMovieDetails/TopMovieDetails";
+import { TopMovieDetails } from "@database/TopMovieDetails/TopMovieDetails";
 
 import MoviePlayer from "../MoviePlayer/MoviePlayer";
 import "./css/topmovie.css";
@@ -23,11 +21,11 @@ interface newHoverState {
   [key: number]: boolean;
 }
 
-const Card = (MovieHoverStatusImg:any, id: number) => {
+const Card = (MovieHoverStatusImg: any, id: number) => {
   return <HoverVideo MovieHoverStatusImg={MovieHoverStatusImg} id={id} />;
 };
 
-const Initial = (rankingNumber:any, rankingBackground:string) => {
+const Initial = (rankingNumber: any, rankingBackground: string) => {
   return (
     <PlainVideo
       rankingNumber={rankingNumber}
@@ -46,10 +44,10 @@ function TopMovie() {
 
   const handleCloseVideo = () => setOpenVideo(false);
 
-  const setId = (id: number,e: any) => {
+  const setId = (id: number, e: any) => {
     e.preventDefault();
     setHoverId(id);
-    setHoverIdArray((prevState : any) => {
+    setHoverIdArray((prevState: any) => {
       const newList: newHoverState = [...prevState];
       newList[`${id}`] = true;
       return newList;
@@ -58,7 +56,7 @@ function TopMovie() {
 
   const removeId = (e: any) => {
     e.preventDefault();
-    setHoverIdArray((prevState : any) => {
+    setHoverIdArray((prevState: any) => {
       const newList: newHoverState = [...prevState];
       newList[`${hoverId}`] = false;
       return newList;
@@ -74,19 +72,19 @@ function TopMovie() {
         component={motion.div}
         onMouseEnter={(e) => {
           const target = e.target as any;
-          setId(target.id,e);
+          setId(target.id, e);
         }}
         onMouseLeave={(e) => {
           removeId(e);
         }}
-        className ="movieHover"
+        className="movieHover"
       >
         {hoverIdArray[index]
           ? Card(TopMovieDetails[index].MovieHoverStatusImg, index)
           : Initial(
-            TopMovieDetails[index].rankingImg,
-            TopMovieDetails[index].rankingBackground
-          )}
+              TopMovieDetails[index].rankingImg,
+              TopMovieDetails[index].rankingBackground
+            )}
       </ListItem>
     ));
   };
@@ -174,4 +172,3 @@ const containerMovieItem = {
 };
 
 export default TopMovie;
-

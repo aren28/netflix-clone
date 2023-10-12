@@ -1,7 +1,7 @@
 import { AppBar } from "@mui/material";
 
-import MenuList from "./Parts/MenuList";
-import FirstView from "./Parts/FirstView";
+import MenuList from "./Parts/MenuList/MenuList";
+import FirstView from "./Parts/FirstView/FirstView";
 
 function Header() {
   return (
@@ -12,13 +12,13 @@ function Header() {
   );
 }
 
-export const appbar = {
+const appbar = {
   backgroundColor: "rgba(20,20,20)",
   backgroundImage: "linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent)",
   letterSpacing: "4px",
 };
 
-export const menu = {
+const menu = {
   fontSize: "20px",
 };
 

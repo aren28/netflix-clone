@@ -10,16 +10,15 @@ import {
 import { PlayCircle, Add, ThumbUpOffAlt } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
-import { TopMovieVideo } from "../../../Database/TopMovieDetails/TopMovieDetails";
+import { TopMovieVideo } from "@database/TopMovieDetails/TopMovieDetails";
 
 // モジュール
 import TopMovieContext from "../TopMovieContext";
 
-function HoverVideo(MovieHoverStatusImg:any, id: number) {
-
+function HoverVideo(MovieHoverStatusImg: any, id: number) {
   const { setOpenVideo, setVideo } = useContext(TopMovieContext) as {
-    setOpenVideo:  (params: boolean) => void;
-    setVideo:  (params: string) => void;
+    setOpenVideo: (params: boolean) => void;
+    setVideo: (params: string) => void;
   };
 
   const handleOpenVideo = (e: any) => {

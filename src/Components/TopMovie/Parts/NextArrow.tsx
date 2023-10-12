@@ -13,8 +13,8 @@ function NextArrow() {
     currentViewMovieCount,
     currentWidth,
   } = useContext(TopMovieContext) as {
-    currentViewX:  number;
-    setCurrentViewX:  (params: number) => void;
+    currentViewX: number;
+    setCurrentViewX: (params: number) => void;
     nextView: boolean;
     currentViewMovieCount: number;
     currentWidth: number;

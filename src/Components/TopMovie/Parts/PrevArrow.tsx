@@ -6,8 +6,13 @@ import { ArrowBackIos } from "@mui/icons-material";
 import TopMovieContext from "../TopMovieContext";
 
 function PrevArrow() {
-  const { currentViewX, setCurrentViewX, prevView } =
-    useContext(TopMovieContext);
+  const { currentViewX, setCurrentViewX, prevView } = useContext(
+    TopMovieContext
+  ) as {
+    currentViewX: number;
+    setCurrentViewX: (params: number) => void;
+    prevView: boolean;
+  };
 
   const handlePrevView = (e: any) => {
     e.preventDefault();

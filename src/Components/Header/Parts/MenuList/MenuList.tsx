@@ -14,6 +14,9 @@ import {
   MenuItem,
 } from "@mui/material";
 
+// イメージ
+import IMAGES from "@components/Header/Images/HeaderImages";
+
 const pages = ["ホーム", "番組", "映画", "新規", "マイリスト"];
 const settings = ["プロフィール", "アカウント", "ダッシュボード", "ログアウト"];
 
@@ -42,7 +45,7 @@ function MenuList() {
         <Toolbar disableGutters>
           <Avatar
             alt="ネットフリックス ロゴ"
-            src="./src/Assets/img/netflix-logo.png"
+            src={IMAGES.netflix_logo}
             variant="square"
             sx={{ width: 150, mr: 3 }}
           />

@@ -12,7 +12,13 @@ function NextArrow() {
     nextView,
     currentViewMovieCount,
     currentWidth,
-  } = useContext(TopMovieContext);
+  } = useContext(TopMovieContext) as {
+    currentViewX: number;
+    setCurrentViewX: (params: number) => void;
+    nextView: boolean;
+    currentViewMovieCount: number;
+    currentWidth: number;
+  };
 
   const handleNextView = (e: any) => {
     e.preventDefault();
